@@ -8,8 +8,7 @@ import (
 	"net/http"
 	"runtime"
 
-	"rest-api/model"
-
+	"github.com/RobGraham/go-rest-api/model"
 	"github.com/gorilla/mux"
 )
 
@@ -28,12 +27,16 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func todoIndex(w http.ResponseWriter, r *http.Request) {
-	todos := &model.Todos{
+	todos := model.Todos{
 		model.Todo{Name: "Hire presentation"},
 		model.Todo{Name: "Host meetup"},
 	}
 
-	json.NewEncoder(w).Encode(todos)
+	err := json.NewEncoder(w).Encode(todos)
+
+	if err != nil {
+		//handle err
+	}
 }
 
 func todoShow(w http.ResponseWriter, r *http.Request) {
